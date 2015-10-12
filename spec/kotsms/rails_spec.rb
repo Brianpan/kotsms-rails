@@ -48,8 +48,8 @@ describe Kotsms::Rails do
         config.smsmessage_password = "12345"
         config.kotsms_url = "http://202.39.48.216/kotsmsapi-1.php"
       end 
- 
-      expect{Kotsms::SmsMessage.new}.to raise_error(ArgumentError)
+      options = {message: "Hello", phone: "0975652213"}
+      expect{Kotsms::SmsMessage.new(options)}.to raise_error(ArgumentError)
     end
 
   end 	

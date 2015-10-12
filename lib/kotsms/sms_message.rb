@@ -10,7 +10,7 @@ module Kotsms
       def initialize(options)
         ##from open class Hash
         options = options.stringify_keys
-        if options["message"] && options["phone"]= /09[0-9]{8}/
+        if options["message"] && /09[0-9]{8}$/.match(options["phone"))
 		    @account = {account: Kotsms::Rails.configuration.smsmessage_account, 
 		    			password: Kotsms::Rails.configuration.smsmessage_password}     
 		    message = options["message"]
