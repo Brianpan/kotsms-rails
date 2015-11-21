@@ -36,6 +36,7 @@ end
  #deal 是一個hash要包含
  #phone : 09開頭的手機號碼
  #message : 想要傳送的訊息
- sms = SmsMessage::Message.new(deal)
+ options = {phone: "0910000000", message: "hello"}
+ sms = Kotsms::::Message.new(options)
  callback_status = sms.send_sms
 ```
