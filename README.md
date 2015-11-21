@@ -1,12 +1,9 @@
 # Kotsms::Rails
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kotsms/rails`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+簡訊王http 簡訊傳送服務串接
+透過rest-client的簡單實踐
 
 ## Installation
 
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'kotsms-rails'
@@ -20,20 +17,25 @@ Or install it yourself as:
 
     $ gem install kotsms-rails
 
-## Usage
+## 使用方式
 
-TODO: Write usage instructions here
+###建立initializer 檔案
+```ruby
+Kotsms::Rails.configure do |config|
+  #簡訊王帳號
+  config.smsmessage_account = Figaro.env.smsmessage_account
+  #簡訊王密碼
+  config.smsmessage_password = Figaro.env.smsmessage_password
+  #簡訊王api 位置
+  config.kotsms_url = Figaro.env.kotsms_url
+end 
+```
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/kotsms-rails/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+###呼叫方式
+```ruby
+ #deal 是一個hash要包含
+ #phone : 09開頭的手機號碼
+ #message : 想要傳送的訊息
+ sms = SmsMessage::Message.new(deal)
+ callback_status = sms.send_sms
+```
